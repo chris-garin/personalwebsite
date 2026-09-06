@@ -2851,12 +2851,14 @@ body.page-fn.light .nav-cta--desktop .cta-button:hover {
 
 .fn-section__head {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
   margin-bottom: 22px;
   padding-bottom: 14px;
   border-bottom: 1px solid rgba(17,24,39,.12);
 }
+.fn-section__heading { display: flex; flex-direction: column; gap: 4px; }
 
 .fn-section__title {
   margin: 0;
@@ -2885,4 +2887,93 @@ body.page-fn.light .nav-cta--desktop .cta-button:hover {
   .fn-section:last-of-type { padding-bottom: 60px; }
   .fn-hero__body { padding: 20px 20px 22px; }
   .fn-latest { padding: 20px 20px 8px; }
+}
+
+/* ============================================================
+   Field Notes: 2-row horizontal carousel
+   ------------------------------------------------------------
+   Each section scrolls sideways instead of growing downward, so a
+   category with 100 posts takes the same vertical space as one
+   with 3. The track is a 2-row grid flowing in COLUMNS, so the
+   number of cards per view falls out of the breakpoint rather
+   than being baked into the markup: 3 columns (6 cards) on
+   desktop, 2 columns (4) on tablet, ~1 (2) on a phone. Page count
+   and dots are computed from scroll metrics, so they stay correct
+   across breakpoints and after the category filter runs.
+   ============================================================ */
+
+.fn-carousel { position: relative; }
+
+.fn-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: calc((100% - 2 * 26px) / 3);
+  gap: 26px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.fn-track::-webkit-scrollbar { display: none; }
+.fn-track:focus-visible { outline: 2px solid #FF5130; outline-offset: 6px; border-radius: 18px; }
+
+.fn-track > .fn-item { scroll-snap-align: start; }
+.fn-item.is-hidden { display: none; }
+
+/* --- Arrows, in the section header --- */
+.fn-section__nav { display: flex; gap: 8px; flex: 0 0 auto; }
+.fn-section__nav[hidden] { display: none; }
+
+.fn-arrow {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(17,24,39,.20);
+  background: transparent;
+  color: #2c3138;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease, opacity .18s ease;
+}
+.fn-arrow svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fn-arrow:hover:not(:disabled) { background: #FF5130; border-color: #FF5130; color: #fff; }
+.fn-arrow:disabled { opacity: .3; cursor: default; }
+
+/* --- Page dots --- */
+.fn-dots {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 22px;
+}
+.fn-dots[hidden] { display: none; }
+
+.fn-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(17,24,39,.22);
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease, width .2s ease;
+}
+.fn-dot:hover { background: rgba(17,24,39,.42); }
+.fn-dot[aria-selected="true"] { background: #FF5130; width: 22px; border-radius: 999px; }
+
+@media (max-width: 959px) {
+  .fn-track { grid-auto-columns: calc((100% - 22px) / 2); gap: 22px; }
+}
+
+@media (max-width: 639px) {
+  .fn-track { grid-auto-columns: 84%; gap: 18px; }
+  .fn-section__head { align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fn-track { scroll-behavior: auto; }
 }
