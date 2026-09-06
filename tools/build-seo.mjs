@@ -34,6 +34,15 @@ const ORIGIN = 'https://chrisgarin.com';
 /** Pages that exist but should not be in the sitemap or the feed. */
 const EXCLUDE = new Set(['privacy-policy', 'terms-of-service']);
 
+/**
+ * Redirect stubs are real index.html files (GitHub Pages has no server-side
+ * redirect config), so this scanner would otherwise announce every deleted
+ * post to Google as a brand new page. They carry `data-redirect-stub` on the
+ * <html> tag; anything with that marker is skipped here. Add the attribute to
+ * any future stub and it stays out of the sitemap and the feed automatically.
+ */
+const REDIRECT_STUB = /<html[^>]*\sdata-redirect-stub/i;
+
 /** A commit touching more than this many files is a template sweep. */
 const SWEEP_THRESHOLD = 5;
 
@@ -104,6 +113,8 @@ const pages = findPages()
     if (seg.some((s) => EXCLUDE.has(s))) return null;
 
     const html = readFileSync(abs, 'utf8');
+    if (REDIRECT_STUB.test(html)) return null;
+
     const declared = jsonLdDate(html, 'dateModified');
     const lastmod =
       declared ||
