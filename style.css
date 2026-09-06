@@ -2659,3 +2659,41 @@ body.page-fn.light .nav-cta--desktop .cta-button:hover {
   font-style: italic;
   text-align: center;
 }
+
+/* --- Data table inside an article ---
+   First used for the conglomerate comparison on the Megaworld post. Nothing
+   on the site had a table before this, so these are the defaults for any
+   future one. The wrapper scrolls on its own so a wide table can never make
+   the whole page scroll sideways on a phone. */
+.article-table {
+  margin: 1.8em 0 2.1em;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.article-content table {
+  width: 100%;
+  min-width: 440px;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+.article-content thead th {
+  padding: 0 14px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #64748b;
+  white-space: nowrap;
+  border-bottom: 2px solid #FF5130;
+}
+.article-content tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e8e2de;
+  color: #334155;
+}
+.article-content tbody tr:nth-child(odd) { background: #FBF7F5; }
+.article-content tbody td:first-child { color: #111827; }
+.article-content tbody strong { color: #111827; font-weight: 600; }
+.article-content tbody tr:last-child td { border-bottom: 0; }
