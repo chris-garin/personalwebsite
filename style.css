@@ -2053,16 +2053,17 @@ body.light .site-footer__links a:hover {
    the author avatar straddles the panel/body seam. Lora display type.
    ============================================================ */
 
-body.page-fn { background: #0F0F0F; }
-body.page-fn.light .navbar { background: #0F0F0F; border-bottom: 1px solid rgba(255,255,255,.10); }
-body.page-fn.light .logo-img { filter: none; }
-body.page-fn.light .nav-links a { color: #ece9e2; border-bottom-color: rgba(255,255,255,.10); }
-body.page-fn.light .nav-links a:hover { color: #FF5130; }
-body.page-fn.light .menu-toggle .bar { background: #ece9e2; }
-body.page-fn.light .nav-links.is-open { background: #0F0F0F; border-top-color: rgba(255,255,255,.12); }
-body.page-fn .site-footer { background: #0F0F0F; border-top: 1px solid rgba(255,255,255,.10); color: #b8bcc2; }
-body.page-fn .site-footer__links a { color: #d6d9dd; }
-body.page-fn .site-footer__meta { color: #83878d; }
+/* Field Notes used to sit on an ink #0F0F0F canvas. It now shares the warm
+   stone of /begin, so the white cards read as paper on a desk rather than
+   tiles on a dark wall. The cards themselves were already light and needed
+   no change. */
+body.page-fn { background: #EFEEEB; }
+body.page-fn.light .navbar { background: #EFEEEB; border-bottom: 1px solid rgba(17,24,39,.10); }
+body.page-fn.light .nav-links a { border-bottom-color: rgba(17,24,39,.08); }
+body.page-fn.light .nav-links.is-open { background: #EFEEEB; border-top-color: rgba(17,24,39,.12); }
+body.page-fn .site-footer { background: #EFEEEB; border-top: 1px solid rgba(17,24,39,.10); color: #5b6068; }
+body.page-fn .site-footer__links a { color: #2c3138; }
+body.page-fn .site-footer__meta { color: #7b8087; }
 
 /* --- Header row: title + description left, filters right --- */
 .fn-head {
@@ -2085,7 +2086,7 @@ body.page-fn .site-footer__meta { color: #83878d; }
   font-weight: 500;
   line-height: 1;
   letter-spacing: -.02em;
-  color: #f4f2ec;
+  color: #16181c;
 }
 
 .fn-head__desc {
@@ -2093,7 +2094,7 @@ body.page-fn .site-footer__meta { color: #83878d; }
   max-width: 620px;
   font-size: 1rem;
   line-height: 1.55;
-  color: #a9adb4;
+  color: #5b6068;
 }
 
 .fn-head__cats {
@@ -2108,9 +2109,9 @@ body.page-fn .site-footer__meta { color: #83878d; }
   font-weight: 600;
   letter-spacing: .05em;
   text-transform: uppercase;
-  color: #c7cace;
+  color: #4b5058;
   background: transparent;
-  border: 1px solid rgba(255,255,255,.20);
+  border: 1px solid rgba(17,24,39,.18);
   border-radius: 999px;
   padding: 8px 15px;
   cursor: pointer;
@@ -2118,15 +2119,15 @@ body.page-fn .site-footer__meta { color: #83878d; }
 }
 
 .fn-chip:hover {
-  border-color: rgba(255,255,255,.45);
-  color: #e6e8ea;
+  border-color: rgba(17,24,39,.42);
+  color: #16181c;
   transform: translateY(-1px);
 }
 
 .fn-chip[aria-pressed="true"] {
-  color: #FF7A5E;
+  color: #ffffff;
   border-color: #FF5130;
-  background: rgba(255,81,48,.10);
+  background: #FF5130;
 }
 
 /* --- The wall --- */
@@ -2697,3 +2698,191 @@ body.page-fn.light .nav-cta--desktop .cta-button:hover {
 .article-content tbody td:first-child { color: #111827; }
 .article-content tbody strong { color: #111827; font-weight: 600; }
 .article-content tbody tr:last-child td { border-bottom: 0; }
+
+/* ============================================================
+   Field Notes: featured lead + category sections
+   ------------------------------------------------------------
+   The index used to be one flat wall of 25 cards. It is now a
+   featured post beside a "Latest posts" rail, then one section
+   per category, so Life is not buried under 19 brand histories.
+   There are no per-post photos on this site, so the hero and the
+   rail thumbnails reuse the same --tone colour panel the cards
+   already use rather than pretending an image exists.
+   ============================================================ */
+
+.fn-lead {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 34px 32px 0;
+}
+.fn-lead.is-hidden { display: none; }
+
+.fn-lead__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+}
+
+/* --- Featured post --- */
+.fn-hero,
+.fn-hero:visited {
+  --tone: #4C5C77;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #16181c;
+  box-shadow: 0 1px 2px rgba(15,23,42,.06);
+  transition: transform .55s cubic-bezier(.33,1,.68,1), box-shadow .55s cubic-bezier(.33,1,.68,1);
+}
+.fn-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(15,23,42,.17);
+}
+
+.fn-hero__panel {
+  position: relative;
+  min-height: 210px;
+  flex: 1;
+  background: var(--tone);
+  background-image: linear-gradient(150deg, rgba(255,255,255,.10), rgba(0,0,0,.20));
+}
+
+.fn-hero__body { padding: 22px 26px 26px; }
+
+.fn-hero__title {
+  margin: 0;
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -.01em;
+  color: #16181c;
+}
+
+.fn-hero__excerpt {
+  margin: 12px 0 0;
+  font-size: .97rem;
+  line-height: 1.62;
+  color: #565b62;
+}
+
+.fn-hero__meta {
+  display: block;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #85898f;
+}
+
+/* --- "Latest posts" rail --- */
+.fn-latest {
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px 24px 10px;
+  box-shadow: 0 1px 2px rgba(15,23,42,.06);
+}
+
+.fn-latest__title {
+  margin: 0 0 6px;
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.32rem;
+  font-weight: 500;
+  color: #16181c;
+}
+
+.fn-latest__list { list-style: none; margin: 0; padding: 0; }
+
+.fn-latest__item { border-bottom: 1px solid #eceae7; }
+.fn-latest__item:last-child { border-bottom: 0; }
+
+.fn-latest__link {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 15px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.fn-latest__thumb {
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  border-radius: 12px;
+  background: var(--tone);
+  background-image: linear-gradient(150deg, rgba(255,255,255,.12), rgba(0,0,0,.18));
+}
+
+.fn-latest__headline {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: .93rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #16181c;
+  transition: color .18s ease;
+}
+.fn-latest__link:hover .fn-latest__headline { color: #FF5130; }
+
+.fn-latest__meta {
+  display: block;
+  margin-top: 5px;
+  font-size: 11.5px;
+  color: #85898f;
+}
+
+/* --- Category sections --- */
+.fn-section {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 46px 32px 0;
+}
+.fn-section.is-hidden { display: none; }
+.fn-section:last-of-type { padding-bottom: 80px; }
+
+.fn-section__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(17,24,39,.12);
+}
+
+.fn-section__title {
+  margin: 0;
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: #16181c;
+}
+
+.fn-section__blurb {
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: #5b6068;
+}
+
+@media (min-width: 900px) {
+  .fn-lead__inner { grid-template-columns: 1.55fr 1fr; align-items: stretch; }
+  .fn-hero__panel { min-height: 260px; }
+}
+
+@media (max-width: 560px) {
+  .fn-lead    { padding: 26px 20px 0; }
+  .fn-section { padding: 36px 20px 0; }
+  .fn-section:last-of-type { padding-bottom: 60px; }
+  .fn-hero__body { padding: 20px 20px 22px; }
+  .fn-latest { padding: 20px 20px 8px; }
+}
